@@ -1,22 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { useHttp } from '../../hooks/http.hook'
+import { useHttp } from '../../hooks/useHttp'
 
 const initialState = {
 	games: [],
 	gamesLoadingStatus: 'idle',
-	activeFilter: 'action',
 	savedGames: [],
-	oldFilter: '',
 	activeFilterObj: {
 		value: 'action',
-		label: 'Action'
-	}
+		label: 'Action',
+	},
 }
 
 export const fetchGamesList = createAsyncThunk(
 	'games/fetchGamesList',
 	async (page_size, activeFilter) => {
-		let filter = activeFilter.getState().games.activeFilter //витягиваем стейт
+		let filter = activeFilter.getState().games.activeFilterObj.value //витягиваем стейт
 		const { request } = useHttp()
 		return await request(
 			`https://api.rawg.io/api/games?key=e2f90b4e56164fc6996b2abb0faa856e&genres=${filter}&page_size=${page_size}`
@@ -39,12 +37,9 @@ export const gamesSlice = createSlice({
 				game => game.id !== action.payload
 			)
 		},
-		AddOldFilter: (state, action) => {
-			state.oldFilter = action.payload
-		},
 		changeActiveFilterObj: (state, action) => {
 			state.activeFilterObj = action.payload
-		}
+		},
 	},
 	extraReducers: builder => {
 		builder
@@ -65,6 +60,5 @@ const { actions, reducer } = gamesSlice
 
 export default reducer
 
-export const { changeActiveFilter, addToWhitelist, deleteFromWhiteList,AddOldFilter,changeActiveFilterObj } =
+export const { addToWhitelist, deleteFromWhiteList, changeActiveFilterObj } =
 	actions
-

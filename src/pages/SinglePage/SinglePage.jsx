@@ -113,4 +113,4 @@ export default SinglePage
 //"store_id": 7, - xbox
 //"store_id": 11, - epic games
 //singleGames -> stores
-//єбися сам
+

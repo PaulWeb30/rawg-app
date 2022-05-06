@@ -4,6 +4,7 @@ import { fetchSearchGames } from './headerSlice'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import useDebounce from '../../hooks/useDebounce'
+import SearchItem from './SearchItem'
 import './Header.scss'
 function Header() {
 	const dispatch = useDispatch()
@@ -38,18 +39,11 @@ function Header() {
 			return <h1 className='header__text'>Ігор не знайдено!</h1>
 		}
 		return arr.map(item => (
-			<div
-				onClick={onCardClick(item.slug)}
-				className='header__dropdown_el'
+			<SearchItem
 				key={item.id + item.rating}
-			>
-				<img
-					alt='Game'
-					className='header__img'
-					src={item.background_image}
-				></img>
-				{item.name}
-			</div>
+				item={item}
+				onCardClick={onCardClick}
+			/>
 		))
 	}
 	return (

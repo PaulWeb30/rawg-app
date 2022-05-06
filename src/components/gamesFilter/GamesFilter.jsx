@@ -1,14 +1,12 @@
-import { React, useState, useEffect } from "react";
-import { changeActiveFilter,changeActiveFilterObj } from "../gameList/gameListSlice";
-import { useDispatch,useSelector } from "react-redux";
-import Select from "react-select";
+import { React, useState, useEffect } from 'react'
+import { changeActiveFilterObj } from '../gameList/gameListSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import Select from 'react-select'
 import './gamesFilter.scss'
 
 function GamesFilter() {
 	const dispatch = useDispatch()
-	const { activeFilterObj,activeFilter } = useSelector(
-		state => state.games
-	)
+	const { activeFilterObj } = useSelector(state => state.games)
 	const options = [
 		{ value: 'action', label: 'Action' },
 		{ value: 'adventure', label: 'Adventure' },
@@ -19,20 +17,11 @@ function GamesFilter() {
 		{ value: '15', label: 'Sport' },
 		{ value: '1', label: 'Racing' },
 	]
-	const [selectedOption, setSelectedOption] = useState(() => {
-		if (activeFilter) {
-			return {
-				value: `${activeFilterObj?.value || 'action'}`,
-				label: `${activeFilterObj?.label || 'Action'}`,
-			}
-		} else {
-			return { value: 'action', label: 'Action' }
-		}
-	})
+	const [selectedOption, setSelectedOption] = useState(activeFilterObj)
 
 	useEffect(() => {
-		dispatch(changeActiveFilter(selectedOption.value))
 		dispatch(changeActiveFilterObj(selectedOption))
+		console.log(selectedOption)
 	}, [selectedOption]) // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
@@ -48,5 +37,4 @@ function GamesFilter() {
 	)
 }
 
-
-export default GamesFilter;
+export default GamesFilter
