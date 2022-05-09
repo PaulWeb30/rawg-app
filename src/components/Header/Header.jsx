@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSearchGames } from './headerSlice'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import useDebounce from '../../hooks/useDebounce'
+import { Route, Routes } from 'react-router-dom'
 import SearchItem from './SearchItem'
 import './Header.scss'
+import WhiteListBtn from '../WhiteListBtn/WhiteListBtn'
 function Header() {
 	const dispatch = useDispatch()
 	const [value, setValue] = useState('')
@@ -13,10 +15,6 @@ function Header() {
 	const [popup, setPopup] = useState(false)
 	const { searchGames, searchGamesLoadingStatus } = useSelector(
 		state => state.searchGames
-	)
-	const { savedGames } = useSelector(state => state.games)
-	let uniqueArr = savedGames.filter(
-		(a, i) => savedGames.findIndex(s => a.name === s.name) === i
 	)
 	const navigate = useNavigate()
 	useEffect(() => {
@@ -71,13 +69,9 @@ function Header() {
 						)
 					) : null}
 				</div>
-				<Link to='/whitelist' className='link'>
-					{savedGames.length > 0 ? (
-						<button className='btn'>{uniqueArr.length} - saved Games</button>
-					) : (
-						<button className='btn'>Whitelist</button>
-					)}
-				</Link>
+				<Routes>
+					<Route path='/' element={<WhiteListBtn />}></Route>
+				</Routes>
 			</div>
 		</>
 	)
