@@ -5,6 +5,7 @@ import Select from 'react-select'
 import './gamesFilter.scss'
 
 function GamesFilter() {
+	console.log('Filter rerender')
 	const dispatch = useDispatch()
 	const { activeFilterObj } = useSelector(state => state.games)
 	const options = [
@@ -21,7 +22,6 @@ function GamesFilter() {
 
 	useEffect(() => {
 		dispatch(changeActiveFilterObj(selectedOption))
-		console.log(selectedOption)
 	}, [selectedOption]) // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (

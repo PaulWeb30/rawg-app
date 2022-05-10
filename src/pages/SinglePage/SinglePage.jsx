@@ -73,7 +73,7 @@ const SinglePage = () => {
 						<p className='game__description'>{game.description_raw}</p>
 						<h3>Where buy?</h3>
 						<div className='game__box-link'>
-							{!stores.results
+							{!stores?.results?.length >= 1
 								? 'You can not buy this game :('
 								: stores.results.map(item => {
 										return (
@@ -90,7 +90,7 @@ const SinglePage = () => {
 															? ps
 															: null
 													}
-													alt='shop where u can by'
+													alt='game'
 												/>
 											</a>
 										)

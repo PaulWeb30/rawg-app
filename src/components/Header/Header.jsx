@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchSearchGames } from './headerSlice'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import useDebounce from '../../hooks/useDebounce'
-import { Route, Routes } from 'react-router-dom'
 import SearchItem from './SearchItem'
 import './Header.scss'
 import WhiteListBtn from '../WhiteListBtn/WhiteListBtn'
@@ -16,6 +15,7 @@ function Header() {
 	const { searchGames, searchGamesLoadingStatus } = useSelector(
 		state => state.searchGames
 	)
+	const location = useLocation()
 	const navigate = useNavigate()
 	useEffect(() => {
 		if (value.trimStart().length >= 1) {
@@ -69,9 +69,7 @@ function Header() {
 						)
 					) : null}
 				</div>
-				<Routes>
-					<Route path='/' element={<WhiteListBtn />}></Route>
-				</Routes>
+				{location.pathname !== '/whitelist' && <WhiteListBtn />}
 			</div>
 		</>
 	)

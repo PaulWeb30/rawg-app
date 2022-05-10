@@ -10,10 +10,10 @@ const App = () => {
 		<>
 			<Header />
 			<Routes>
-				<Route path='/' element={<Home />}></Route>
-				<Route path='/game/:name' element={<SinglePage />}></Route>
-				<Route path='/whitelist' element={<WhiteListPage />}></Route>
-				<Route path='*' element={<NotFoundPage />}></Route>
+				<Route path='/' element={<Home />} />
+				<Route path='/game/:name' element={<SinglePage />} />
+				<Route path='/whitelist' element={<WhiteListPage />} />
+				<Route path='*' element={<NotFoundPage />} />
 			</Routes>
 		</>
 	)

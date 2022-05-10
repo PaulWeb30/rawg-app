@@ -40,7 +40,7 @@ function GameList() {
 					) : gamesLoadingStatus === 'error' ? (
 						<h5 className='text-center mt-5'> Помилка загрузки</h5>
 					) : (
-						renderGames(games?.results.slice(0, limit))
+						renderGames(games?.results?.slice(0, limit))
 					)}
 				</div>
 				<div ref={childRef}></div>
